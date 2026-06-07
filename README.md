@@ -4,8 +4,15 @@ Reproducibility code for the BSc thesis **"Leveraging Machine Learning and
 Wearables Technology for Sepsis Prediction and Workflow Optimization"**
 by **Nikolaj Storm Petersen** (Copenhagen Business School, 2026).
 
+[![Thesis (PDF)](https://img.shields.io/badge/Read%20the-thesis%20(PDF)-b31b1b.svg)](paper/Storm_Petersen_2026_Sepsis_Wearables_Thesis.pdf)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](LICENSE)
 [![Data: MIMIC-IV](https://img.shields.io/badge/Data-MIMIC--IV%20(credentialed)-orange.svg)](DATA_ACCESS.md)
+
+> 📄 **Read the paper.** The full bachelor thesis this code accompanies is in
+> [`paper/Storm_Petersen_2026_Sepsis_Wearables_Thesis.pdf`](paper/Storm_Petersen_2026_Sepsis_Wearables_Thesis.pdf),
+> with a 2-page [English summary](paper/Storm_Petersen_2026_English_Summary.pdf).
+> Start there for the full argument, methods, and results; this repository holds
+> the code behind it.
 
 > **License in one line.** Free to use and adapt for **non-commercial** purposes
 > **with attribution**. Commercial use is not permitted. See [How to cite](#license--how-to-cite).
@@ -85,6 +92,7 @@ paper's results needs real MIMIC-IV ([`DATA_ACCESS.md`](DATA_ACCESS.md)).
 ```
 .
 ├── README.md  ·  LICENSE  ·  CITATION.cff  ·  DATA_ACCESS.md  ·  requirements.txt
+├── paper/                  the bachelor thesis (PDF) + 2-page English summary
 ├── data/synthetic/         synthetic sample (schema-faithful, fake values)
 ├── tools/                  make_synthetic_data.py, demo_smoke_test.py
 ├── <root scripts>.py       comparators (run_*) and figure scripts

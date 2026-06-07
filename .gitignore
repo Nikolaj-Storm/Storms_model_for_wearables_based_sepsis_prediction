@@ -20,6 +20,10 @@
 *.png
 *.pdf
 
+# ...but DO ship the thesis PDF(s)
+!paper/
+!paper/*.pdf
+
 # Python
 __pycache__/
 *.py[cod]
