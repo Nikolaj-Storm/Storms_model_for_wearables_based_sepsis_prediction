@@ -1,0 +1,27 @@
+# Core analysis + modeling (Stages 2-6, run on local parquet files)
+pandas>=1.5
+numpy>=1.23
+scikit-learn>=1.2
+xgboost>=1.7
+lightgbm>=3.3
+scipy>=1.9
+joblib>=1.2
+
+# Figures (Stage 6)
+matplotlib>=3.6
+seaborn>=0.12
+
+# Parquet I/O + spreadsheet reporting
+pyarrow>=10.0
+openpyxl>=3.1
+xlsxwriter>=3.0
+
+# Optional runtime helpers
+psutil>=5.9
+
+# --- Stage 1 ONLY: raw extraction from MIMIC-IV on Google BigQuery ---
+# Needed only if you re-run the extraction SQL against PhysioNet's BigQuery
+# mirror. Not required to run the modeling/figure stages on extracted parquet.
+google-cloud-bigquery>=3.0
+google-cloud-bigquery-storage>=2.0
+db-dtypes>=1.0

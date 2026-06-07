@@ -1,0 +1,43 @@
+# ============================================================================
+#  HARD RULE: never commit real or patient-derived MIMIC-IV data.
+#  The PhysioNet Credentialed Health Data Use Agreement forbids redistributing
+#  the data or anything derived from it at the patient level (processed
+#  datasets, trained model checkpoints, prediction files, result tables).
+# ============================================================================
+*.parquet
+*.joblib
+*.pkl
+*.pickle
+*.csv
+*.xlsx
+*.xls
+
+# ...but DO ship the small SYNTHETIC sample (no real records).
+!data/synthetic/
+!data/synthetic/*.parquet
+
+# Generated figures and reports (regenerate them from the scripts)
+*.png
+*.pdf
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*~
+.~lock.*
+
+# Credentials (never commit)
+*.json
+!data/synthetic/*.json
+service-account*.json
+.env

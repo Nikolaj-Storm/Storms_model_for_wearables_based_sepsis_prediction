@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the thesis below. Use is non-commercial only (CC BY-NC 4.0)."
+title: "Leveraging Machine Learning and Wearables Technology for Sepsis Prediction and Workflow Optimization"
+abstract: >-
+  Reproducibility code for a BSc thesis investigating whether wearable-grade
+  vital signs can predict Sepsis-3 onset on hospital general wards, using an
+  etiology-specific stacked ensemble on MIMIC-IV, and assessing organizational
+  implementation viability through a contextualized UTAUT framework.
+type: software
+authors:
+  - family-names: "Storm Petersen"
+    given-names: "Nikolaj"
+date-released: 2026-05-06
+license: CC-BY-NC-4.0
+keywords:
+  - sepsis prediction
+  - wearable sensors
+  - machine learning
+  - stacked ensemble
+  - MIMIC-IV
+  - UTAUT
+  - clinical decision support
