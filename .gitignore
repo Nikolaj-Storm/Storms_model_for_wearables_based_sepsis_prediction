@@ -24,6 +24,11 @@
 !paper/
 !paper/*.pdf
 
+# ...and the README result figures
+!assets/
+!assets/figures/
+!assets/figures/*.png
+
 # Python
 __pycache__/
 *.py[cod]

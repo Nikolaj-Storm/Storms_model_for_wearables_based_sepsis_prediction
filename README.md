@@ -19,6 +19,51 @@ by **Nikolaj Storm Petersen** (Copenhagen Business School, 2026).
 
 ---
 
+## Some results
+
+A few headline figures from the thesis. See the
+[full paper](paper/Storm_Petersen_2026_Sepsis_Wearables_Thesis.pdf) for complete
+captions, methods, and the rest of the analysis.
+
+**The pipeline at a glance** — from six raw wearable-proxy vitals to a
+per-patient-hour sepsis risk score, via etiology-specialized base learners and a
+stacked meta-learner.
+
+![Pipeline architecture](assets/figures/01_pipeline_architecture.png)
+
+**Headline performance (Figure 16).** The stacked ensemble (blue) versus a Danish
+TOKS 2.1 clinical-practice proxy (orange) at 4-hour sampling. AUROC 0.7287 vs
+0.6444 and AUPRC 0.0662 vs 0.0396, a 67% lift in sepsis-specific discrimination
+over current practice.
+
+![Estimator performance](assets/figures/figure16_estimator_performance.png)
+
+**All estimators, 6-hour horizon (Figure 14).** Every model at 4-hour resolution,
+from the stacked ensemble down to single-model baselines, raw vitals, and the
+rule-based TOKS proxy.
+
+![Results table](assets/figures/figure14_results_table_4h.png)
+
+**More frequent sampling helps (Figure 20).** AUPRC lift over chance rises from
+2.66x at 4-hour sampling to 3.75x at 1-hour, the advantage of wearable-frequency
+monitoring over current ward practice.
+
+![Precision-recall by resolution](assets/figures/figure20_pr_by_resolution.png)
+
+**Etiology specialization works (Figure 18).** Each infection-specific base learner
+predicts its own etiology best (diagonal dominance), and the stacked meta-learner
+beats the global model across streams.
+
+![Base-learner specialization](assets/figures/figure18_base_learner_specialization.png)
+
+**What the model leans on (Figure 17).** Univariate AUPRC lift per engineered
+feature. CUSUM drift, expanding statistics, and temperature dynamics carry the
+most standalone signal.
+
+![Feature importance](assets/figures/figure17_feature_importance.png)
+
+---
+
 ## What this is
 
 The thesis asks whether the six vital signs a wearable can capture (heart rate,
@@ -93,6 +138,7 @@ paper's results needs real MIMIC-IV ([`DATA_ACCESS.md`](DATA_ACCESS.md)).
 .
 ├── README.md  ·  LICENSE  ·  CITATION.cff  ·  DATA_ACCESS.md  ·  requirements.txt
 ├── paper/                  the bachelor thesis (PDF) + 2-page English summary
+├── assets/figures/         result figures shown in this README
 ├── data/synthetic/         synthetic sample (schema-faithful, fake values)
 ├── tools/                  make_synthetic_data.py, demo_smoke_test.py
 ├── <root scripts>.py       comparators (run_*) and figure scripts
