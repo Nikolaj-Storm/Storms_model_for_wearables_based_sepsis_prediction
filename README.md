@@ -172,8 +172,7 @@ https://creativecommons.org/licenses/by-nc/4.0/.
 If you use or build on this work, please cite (see [`CITATION.cff`](CITATION.cff)):
 
 > Storm Petersen, N. (2026). *Leveraging Machine Learning and Wearables
-> Technology for Sepsis Prediction and Workflow Optimization* [BSc thesis and
-> code]. Copenhagen Business School. Licensed under CC BY-NC 4.0.
+> Technology for Sepsis Prediction and Workflow Optimization*. Copenhagen Business School. Licensed under CC BY-NC 4.0.
 
 The license covers the **code only**. It grants no rights to MIMIC-IV, which is
 governed by the PhysioNet Credentialed Health Data Use Agreement.
