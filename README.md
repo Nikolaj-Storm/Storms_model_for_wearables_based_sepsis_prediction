@@ -19,6 +19,50 @@ by **Nikolaj Storm Petersen** (Copenhagen Business School, 2026).
 
 ---
 
+## Journal paper (2026, in preparation)
+
+The machine-learning half of the thesis is being turned into a journal paper. The code for it lives in
+[`technical/Models/Ultimate/`](technical/Models/Ultimate), [`technical/Models/Barton_Comparison/`](technical/Models/Barton_Comparison)
+and [`technical/Models/Journal_paper/`](technical/Models/Journal_paper). What changed relative to the thesis:
+
+- **Patient-level split.** Train and test share no patient (the thesis split by ICU stay).
+- **Three-layer stacks, two variants.** Variant A uses supervised etiology streams (respiratory, urinary, other), and
+  variant B uses unsupervised k-means physiology clusters. Each stream has a balanced random-forest learner (96 features)
+  and an XGBoost learner (196 features, adding 24-hour history and shock proxies).
+- **Full bedside comparators.** SIRS, qSOFA, NEWS2 and MEWS get every input their definition requires (white cell count,
+  Glasgow Coma Scale, supplemental oxygen), which the models never see.
+- **Barton et al. (2019) as comparator.** Faithfully re-implemented from raw chart events and also retrained on the hourly task.
+
+Headline results (MIMIC-IV, 11,752 held-out ICU stays, Sepsis-3 onset within 6 h, every grid row scored):
+
+| Model | AUROC, 4-hourly grid | AUROC, hourly grid |
+|---|---|---|
+| Cluster stack (variant B) | **0.739** | **0.781** (95% CI 0.769 to 0.792) |
+| Etiology stack (variant A) | 0.736 | 0.778 |
+| Single XGBoost | 0.735 | 0.778 |
+| Barton et al. (2019), reconstructed | 0.683 | 0.678 |
+| NEWS2 (full) | 0.580 | 0.596 |
+| MEWS / SIRS / qSOFA (full) | 0.551 / 0.545 / 0.522 | 0.556 / 0.553 / 0.531 |
+
+- Hourly data beat four-hourly data by 0.042 AUROC (0.037 to 0.048) on the same patients.
+- The faithful Barton re-implementation reaches 0.734 / 0.627 / 0.593 at 0 / 24 / 48 h against the published 0.88 / 0.84 / 0.83.
+- Within the random-forest family, each etiology specialist is the best estimator on its own source and their stack beats the
+  global learner (AUROC +0.008, 0.005 to 0.011). With strong XGBoost base learners that gain shrinks to about zero.
+
+![Journal Fig. 1, architecture](assets/figures/journal_fig1_architecture.png)
+
+![Journal Fig. 2, full bedside comparators](assets/figures/journal_fig2_full_comparators_4h.png)
+
+![Journal Fig. 5, specialisation](assets/figures/journal_fig5_specialisation.png)
+
+**Run order.** `technical/Models/Ultimate/run_all.sh` then `run_all_4h.sh` (main stacks, encounter protocol, cadence; about
+3 to 4 h on a 16 GB laptop, checkpointed and resumable), `Barton_Comparison/120_barton_full_replication.py`, then in
+`Journal_paper/`: `extract_paper_inputs.py`, `comparator_events.sql` (BigQuery, export to parquet),
+`full_clinical_comparators.py`, `barton_hourly_comparator.py`, `no_global_stream_ablation.py`, `analysis_tables.py`,
+`univariate_lift.py` and the figure scripts. Replace the `/PATH/TO/...` placeholders first (`grep -rn "EDIT:"`).
+
+---
+
 ## Some results
 
 A few headline figures from the thesis. See the
@@ -145,7 +189,7 @@ paper's results needs real MIMIC-IV ([`DATA_ACCESS.md`](DATA_ACCESS.md)).
 └── technical/
     ├── Cleansing/          Stage 1-2: extraction (SQL + BigQuery), targets, etiology, cohort stats
     ├── Feature Engineering/ Stage 3: clinical composites, temporal, interaction features
-    ├── Models/             Stage 4: baselines, V13, and the final V13b ensemble (V13/, V13b/)
+    ├── Models/             Stage 4: baselines, V13, V13b (thesis); Ultimate/, Barton_Comparison/, Journal_paper/ (journal paper)
     └── Visualizations/     Stage 6: figure scripts
 ```
 
